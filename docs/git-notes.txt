@@ -1,0 +1,5 @@
+git add .
+git commit -m "commit-message"
+git push https://github.com/markokrizan/poslovna-client.git master
+
+Node modules excluded - npm(yarn)(whatever) install
