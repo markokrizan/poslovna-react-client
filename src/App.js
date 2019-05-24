@@ -13,77 +13,84 @@ import User from './components/User';
 import Company from './components/Company';
 import OrderReciept from './components/OrderReciept';
 
+import {Provider} from 'react-redux';
+import store from './store';
+
 import './App.css';
+
 
 function App() {
   return (
-      <Router>
-        <Header/>
-        <Toolbar/>
-        <Switch>
-              <Route
-                path="/warehouses"
-                exact
-                component={Warehouses}
-              />
-              <Redirect from="/" to="/warehouses" exact />
-              <Route
-                path="/warehouse/:id"
-                exact
-                component={Warehouses}
-              />
-              <Route
-                path="/product/:id"
-                exact
-                component={Product}
-              />
-              <Route
-                path="/product/:id/analytics"
-                exact
-                component={Analytics}
-              />
-              <Route
-                path="/login"
-                exact
-                component={Login}
-              />
-              <Route
-                path="/order-products/receipt"
-                exact
-                component={OrderReciept}
-              />
-              <Route
-                path="/order-products"
-                exact
-                component={OrderProducts}
-              />
-              <Route
-                path="/order"
-                exact
-                component={Company}
-              />
-              <Route
-                path="/pending-orders/:id"
-                exact
-                component={PendingOrderDetails}
-              />
-              <Route
-                path="/pending-orders"
-                exact
-                component={PendingOrders}
-              />
-              <Route
-                path="/user"
-                exact
-                component={User}
-              />
-              <Route
-                path="/company-info"
-                exact
-                component={Company}
-              />
-        </Switch>
-      </Router>
+      //Provider provides the state store to the component
+      <Provider store={store}>
+        <Router>
+          <Header/>
+          <Toolbar/>
+          <Switch>
+                <Route
+                  path="/warehouses"
+                  exact
+                  component={Warehouses}
+                />
+                <Redirect from="/" to="/warehouses" exact />
+                <Route
+                  path="/warehouse/:id"
+                  exact
+                  component={Warehouses}
+                />
+                <Route
+                  path="/product/:id"
+                  exact
+                  component={Product}
+                />
+                <Route
+                  path="/product/:id/analytics"
+                  exact
+                  component={Analytics}
+                />
+                <Route
+                  path="/login"
+                  exact
+                  component={Login}
+                />
+                <Route
+                  path="/order-products/receipt"
+                  exact
+                  component={OrderReciept}
+                />
+                <Route
+                  path="/order-products"
+                  exact
+                  component={OrderProducts}
+                />
+                <Route
+                  path="/order"
+                  exact
+                  component={Company}
+                />
+                <Route
+                  path="/pending-orders/:id"
+                  exact
+                  component={PendingOrderDetails}
+                />
+                <Route
+                  path="/pending-orders"
+                  exact
+                  component={PendingOrders}
+                />
+                <Route
+                  path="/user"
+                  exact
+                  component={User}
+                />
+                <Route
+                  path="/company-info"
+                  exact
+                  component={Company}
+                />
+          </Switch>
+        </Router>
+      </Provider>
   );
 }
 
