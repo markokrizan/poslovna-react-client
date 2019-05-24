@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export class OrderProducts extends Component {
   render() {
@@ -161,7 +162,7 @@ export class OrderProducts extends Component {
               </div>
               <br/>
               <div className="row">
-                <div className="col-md-12 d-flex justify-content-end align-items-center border-top p-1"><a class="btn btn-success" href="#">Place order</a></div>
+                <div className="col-md-12 d-flex justify-content-end align-items-center border-top p-1"> <Link className = "toolbar-link" to={`/order-products/receipt`}><a class="btn btn-success">Place order</a></Link></div>
               </div>
             </div>
           </div>

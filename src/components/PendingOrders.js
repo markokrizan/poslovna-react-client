@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export class PendingOrders extends Component {
   render() {
@@ -30,21 +31,21 @@ export class PendingOrders extends Component {
                           <td className="text-center">G543423</td>
                           <td className="text-center">01/01/2019</td>
                           <td className="text-center">Company 1</td>
-                          <td className="text-center"><a className="btn btn-info" href="./pending-order-details.html">Detalis</a></td>
+                          <td className="text-center"><Link className = "custom-link" to={`/pending-orders/1`}><a className="btn btn-info">Detalis</a></Link></td>
                         </tr>
                         <tr>
                           <th scope="row">2</th>
                           <td className="text-center">J43534534</td>
                           <td className="text-center">02/01/2019</td>
                           <td className="text-center">Company 2</td>
-                          <td className="text-center"><a className="btn btn-info" href="./pending-order-details.html">Detalis</a></td>
+                          <td className="text-center"><Link className = "custom-link" to={`/pending-orders/2`}><a className="btn btn-info">Detalis</a></Link></td>
                         </tr>
                         <tr>
                           <th scope="row">3</th>
                           <td className="text-center">H3453455</td>
                           <td className="text-center">03/01/2019</td>
                           <td className="text-center">Company 3</td>
-                          <td className="text-center"><a className="btn btn-info" href="./pending-order-details.html">Detalis</a></td>
+                          <td className="text-center"><Link className = "custom-link" to={`/pending-orders/3`}><a className="btn btn-info">Detalis</a></Link></td>
                         </tr>
                       </tbody>
                     </table>

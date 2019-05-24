@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component} from 'react'
+import { Link } from 'react-router-dom';
 
 export class Warehouse extends Component {
   render() {
@@ -36,27 +37,28 @@ export class Warehouse extends Component {
                     <td>Some product 1</td>
                     <td>12121</td>
                     <td>$1900.44</td>
-                    <td><a className="btn btn-info" href="./pages/product.html">Info</a></td>
+                    <td><Link className = "custom-link" to={`/product/1`}><a className="btn btn-info">Info</a></Link></td>
                   </tr>
                   <tr>
                     <th scope="row">2</th>
                     <td>Some product 2</td>
                     <td>122</td>
                     <td>$1900.44</td>
-                    <td><a className="btn btn-info" href="./pages/product.html">Info</a></td>
+                    <td><Link className = "custom-link" to={`/product/2`}><a className="btn btn-info">Info</a></Link></td>
                   </tr>
                   <tr>
                     <th scope="row">3</th>
                     <td>Some product 3</td>
                     <td>33</td>
                     <td>$1900.44</td>
-                    <td><a className="btn btn-info" href="./pages/product.html">Info</a></td>
+                    <td><Link className = "custom-link" to={`/product/3`}><a className="btn btn-info">Info</a></Link></td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
+        
     )
   }
 }
