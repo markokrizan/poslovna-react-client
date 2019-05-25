@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import Header from './components/Header';
 import Toolbar from './components/Toolbar';
@@ -13,16 +13,26 @@ import User from './components/User';
 import Company from './components/Company';
 import OrderReciept from './components/OrderReciept';
 
-import {Provider} from 'react-redux';
-import store from './store';
+
+
+import {connect} from 'react-redux';
 
 import './App.css';
 
 
-function App() {
-  return (
-      //Provider provides the state store to the component
-      <Provider store={store}>
+class App extends Component {
+
+  componentDidMount(){
+    console.log(this.props.isFetching);
+  }
+
+  render(){
+    console.log("APP COMPONENT SEES FETCHING: ");
+    console.log(this.props.isFetching);
+    if(this.props.isFetching){
+      return(<h2>Loading</h2>);
+    }
+    return (
         <Router>
           <Header/>
           <Toolbar/>
@@ -90,8 +100,13 @@ function App() {
                 />
           </Switch>
         </Router>
-      </Provider>
-  );
+        );
+    }
+ 
 }
 
-export default App;
+const mapStateToProps = state => ({
+  isFetching: state.isFetching
+});
+
+export default connect(mapStateToProps)(App);

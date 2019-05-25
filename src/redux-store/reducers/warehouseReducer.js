@@ -1,5 +1,4 @@
 import { FETCH_WAREHOUSES } from '../actions/types';
-
 //warehouse reducer
 
 const initialState = {
@@ -7,6 +6,7 @@ const initialState = {
 }
 
 export default function(state = initialState, action){
+    console.log(state); 
     switch(action.type){
         case FETCH_WAREHOUSES:
             //reduce the inital state with the new data (payload from the action that brings in new data for the state)
