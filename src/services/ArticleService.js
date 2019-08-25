@@ -1,5 +1,11 @@
 import request from "./request";
 
+const getAllArticleCards = async () =>
+  await request({
+    url: `/articles`,
+    method: "GET"
+  });
+
 const getArticlesCards = async warehouseId =>
   await request({
     url: `/warehouses/${warehouseId}/article-cards`,
@@ -7,10 +13,18 @@ const getArticlesCards = async warehouseId =>
   });
 
 const getArticlesCard = async articleCardId => {
-  await request({
+  return await request({
     url: `/article-cards/${articleCardId}`,
     method: "GET"
   });
 };
 
-export { getArticlesCards, getArticlesCard };
+const orderArticles = async order => {
+  return await request({
+    url: "/documents",
+    method: "POST",
+    requestData: order
+  });
+};
+
+export { getArticlesCards, getArticlesCard, getAllArticleCards, orderArticles };

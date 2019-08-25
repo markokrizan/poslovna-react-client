@@ -17,6 +17,8 @@ import { PendingOrderDetails } from "./components/PendingOrderDetails";
 import User from "./components/User";
 import Company from "./components/Company";
 import OrderReciept from "./components/OrderReciept";
+import ShipProducts from "./components/ShipProducts";
+import InHouseTranzit from "./components/InHouseTranzit";
 
 import "./App.css";
 
@@ -43,7 +45,8 @@ class App extends Component {
             component={OrderReciept}
           />
           <Route path="/order-products" exact component={OrderProducts} />
-          <Route path="/order" exact component={Company} />
+          <Route path="/ship-products" exact component={ShipProducts} />
+          <Route path="/in-house-tranzit" exact component={InHouseTranzit} />
           <Route
             path="/pending-orders/:id"
             exact
