@@ -2,7 +2,7 @@
 
 Prerequisites
 
-Install node.js (with npm)
+Install node.js (with npm) - [https://nodejs.org/en/]
 
 Install yarn
 
@@ -17,5 +17,3 @@ Run
 ### `yarn start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `npm run build`
