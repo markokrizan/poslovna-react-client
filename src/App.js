@@ -12,14 +12,13 @@ import Product from "./components/Product";
 import Analytics from "./components/Analytics";
 import Login from "./components/Login";
 import OrderProducts from "./components/OrderProducts";
-import PendingOrders from "./components/PendingOrders";
-import { PendingOrderDetails } from "./components/PendingOrderDetails";
 import User from "./components/User";
 import Company from "./components/Company";
 import OrderReciept from "./components/OrderReciept";
 import ShipProducts from "./components/ShipProducts";
 import InHouseTranzit from "./components/InHouseTranzit";
-
+import Documents from "./components/Documents";
+import DocumentItems from "./components/DocumentItems";
 import "./App.css";
 
 class App extends Component {
@@ -45,14 +44,10 @@ class App extends Component {
             component={OrderReciept}
           />
           <Route path="/order-products" exact component={OrderProducts} />
+          <Route path="/documents" exact component={Documents} />
+          <Route path="/documents/:id/items" exact component={DocumentItems} />
           <Route path="/ship-products" exact component={ShipProducts} />
           <Route path="/in-house-tranzit" exact component={InHouseTranzit} />
-          <Route
-            path="/pending-orders/:id"
-            exact
-            component={PendingOrderDetails}
-          />
-          <Route path="/pending-orders" exact component={PendingOrders} />
           <Route path="/user" exact component={User} />
           <Route path="/company-info" exact component={Company} />
         </Switch>

@@ -1,0 +1,10 @@
+td {
+    text-align: center !important;
+}
+
+.btn.btn-dark {
+    padding : 10px !important;
+    width: 100px !important;
+    height: 60px !important;
+    margin: 10px;
+}

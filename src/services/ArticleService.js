@@ -19,7 +19,14 @@ const getArticlesCard = async articleCardId => {
   });
 };
 
-const orderArticles = async order => {
+const getArticlesCardAnalytics = async articleCardId => {
+  return await request({
+    url: `/article-cards/${articleCardId}/analytics`,
+    method: "GET"
+  });
+};
+
+const createDocument = async order => {
   return await request({
     url: "/documents",
     method: "POST",
@@ -27,4 +34,4 @@ const orderArticles = async order => {
   });
 };
 
-export { getArticlesCards, getArticlesCard, getAllArticleCards, orderArticles };
+export { getArticlesCards, getArticlesCard, getAllArticleCards, createDocument, getArticlesCardAnalytics };

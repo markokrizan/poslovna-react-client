@@ -93,7 +93,7 @@ export default function Warehouse({ warehouseId, articleGroups }) {
       </div>
     </div>
   ) : (
-    <div className="col-md-10 p-0 bg-info" draggable="true">
+    <div className="col-md-10 p-0 bg-info" >
       <div className="card">
         <div className="card-header d-flex justify-content-center align-items-center">
           {" "}

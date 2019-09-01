@@ -1,53 +1,52 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { concludeFiscalYear } from '../services/FiscalYearService'
 
 class Toolbar extends Component {
   render() {
     return (
-      <div className="row m-1">
-        <div className="col-md-1 d-flex justify-content-center align-items-center bg-info">
-          <Link className="toolbar-link" to={`/order-products`}>
-            <a className="btn btn-dark">
-              <i className="fa fa-arrow-down"></i> Order{" "}
-            </a>
-          </Link>
-        </div>
-        <div className="col-md-1 d-flex justify-content-center align-items-center bg-info">
-          <Link className="toolbar-link" to={`/ship-products`}>
-            <a className="btn btn-dark" href="#">
-              <i className="fa fa-arrow-up"></i> Ship{" "}
-            </a>
-          </Link>
-        </div>
-        <div className="col-md-1 bg-info d-flex justify-content-center align-items-center">
-          <Link className="toolbar-link" to={`/in-house-tranzit`}>
-            <a className="btn btn-dark btn-block w-100 m-0 p-0 py-1">
-              <i className="fa fa-arrows-alt"></i>&nbsp;In house tranzit
-            </a>
-          </Link>
-        </div>
-        <div className="col-md-1 bg-info d-flex justify-content-center align-items-center">
-          <Link className="toolbar-link" to={`/pending-orders`}>
-            <a className="btn btn-dark btn-block w-100 m-0 p-0 py-1">
-              <i className="fa fa-file-text-o"></i>&nbsp;Orders (2)
-            </a>
-          </Link>
-        </div>
-        <div className="col-md-1 d-flex justify-content-center align-items-center bg-info"></div>
-        <div className="col-md-1 d-flex justify-content-center align-items-center bg-info"></div>
-        <div className="col-md-1 d-flex justify-content-center align-items-center bg-info"></div>
-        <div className="col-md-1 d-flex justify-content-center align-items-center bg-info"></div>
-        <div className="col-md-1 d-flex justify-content-center align-items-center bg-info"></div>
-        <div className="col-md-1 d-flex justify-content-center align-items-center bg-info"></div>
-        <div className="col-md-1 d-flex justify-content-center align-items-center bg-info"></div>
-        <div className="col-md-1 d-flex justify-content-center align-items-center bg-info">
-          <Link className="toolbar-link" to={`/company-info`}>
-            <a className="btn btn-dark btn-block w-100 m-0 p-0 py-1">
+      <div className="container-fluid">
+        <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+          <div className="btn-group mr-2" role="group" aria-label="First group">
+            <Link className="toolbar-link" to={`/order-products`}>
+              <a className="btn btn-dark">
+                <i className="fa fa-arrow-down"></i> Order{" "}
+              </a>
+            </Link>
+            <Link className="toolbar-link" to={`/ship-products`}>
+              <a className="btn btn-dark" href="#">
+                <i className="fa fa-arrow-up"></i> Ship{" "}
+              </a>
+            </Link>
+            <Link className="toolbar-link" to={`/in-house-tranzit`}>
+              <a className="btn btn-dark" href="#">
+              <i className="fa fa-arrows-alt"></i>&nbsp;In house
+              </a>
+            </Link>
+            <Link className="toolbar-link" to={`/documents`}>
+              <a className="btn btn-dark" href="#">
+                <i className="fa fa-file-text"></i>&nbsp;Documents
+              </a>
+            </Link>
+            <Link className="toolbar-link" to={`/company-info`}>
+              <a className="btn btn-dark" href="#">
               <i className="fa fa-building-o"></i>Company
-            </a>
-          </Link>
+              </a>
+            </Link>
+            <Link className="toolbar-link" to={`/documents`}>
+              <a className="btn btn-dark" href="#" onClick = {async () => {
+                const userResponse = window.confirm("Conclude fiscal year?");
+                if (userResponse == true) {
+                  await concludeFiscalYear();
+                }
+              }}>
+                <i className="fa fa-times-circle"></i>Conclude
+              </a>
+            </Link>
+          </div>
         </div>
       </div>
+      
     );
   }
 }

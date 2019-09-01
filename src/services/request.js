@@ -15,7 +15,7 @@ export default async function request({
     const { data } = await api({ method, url, headers, data: requestData });
     return data;
   } catch (error) {
-    window.alert(error.errorMessage);
+    window.alert(error.response.data.errorMessage);
     throw error;
   }
 }

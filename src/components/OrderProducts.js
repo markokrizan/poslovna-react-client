@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getWarehouses } from "../services/WarehouseService";
 import { getBusinessPartners } from "../services/BusinessPartnerService";
-import { getAllArticleCards, orderArticles } from "../services/ArticleService";
+import { getAllArticleCards, createDocument } from "../services/ArticleService";
 import { random } from "lodash";
 import { CURRENCY } from "../consts";
 
@@ -36,6 +36,10 @@ export default function OrderProducts() {
     const selectedArticle = { articleId: id, price, quantity, name };
     setPickedArticleCards([...pickedArticleCards, selectedArticle]);
   };
+
+  const removeAddedArticle = (id) => {
+    setPickedArticleCards(pickedArticleCards.filter(articleCard => articleCard.articleId !== id))
+  }
 
   const renderArticles = () =>
     allArticleCards.map((article, idx) => {
@@ -85,7 +89,7 @@ export default function OrderProducts() {
           <td className="text-center">{article.price}</td>
           <td className="text-center">{article.quantity * article.price}</td>
           <td>
-            <input type="checkbox" />
+            <button className="btn btn-info" onClick={() => removeAddedArticle(article.articleId)}>Remove</button>
           </td>
         </tr>
       );
@@ -102,7 +106,7 @@ export default function OrderProducts() {
       targetWarehouseId: selectedLocalWarehouse
     };
 
-    await orderArticles(order);
+    await createDocument(order);
     window.location.href = `/warehouses/${selectedLocalWarehouse}`;
   };
 
@@ -152,51 +156,6 @@ export default function OrderProducts() {
                     <div className="card-header"> Pick products to order:</div>
                     <div className="card-body">
                       <div className="row">
-                        <div className="col-md-12 d-flex justify-content-center align-items-center">
-                          <form className="form-inline"></form>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <div className="input-group">
-                            <input
-                              type="text"
-                              className="form-control w-75"
-                              id="inlineFormInputGroup"
-                              placeholder="Search products"
-                            />
-                            <div className="input-group-append">
-                              <button className="btn btn-dark" type="button">
-                                <i className="fa fa-search"></i>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-md-6 d-flex justify-content-center">
-                          <select className="rounded w-100">
-                            <option value="" selected="" disabled="">
-                              Filter products by group
-                            </option>
-                            <option
-                              data-tokens="ketchup mustard"
-                              value="Hot Dog, Fries and a Soda"
-                            >
-                              Company x
-                            </option>
-                            <option
-                              data-tokens="mustard"
-                              value="Burger, Shake and a Smile"
-                            >
-                              Company y
-                            </option>
-                            <option data-tokens="frosting" value="Company x">
-                              Company x
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                      <br />
-                      <div className="row">
                         <div className="col-md-12">
                           <table className="table">
                             <thead className="thead-dark">
@@ -225,22 +184,6 @@ export default function OrderProducts() {
                   <div className="card">
                     <div className="card-header"> Picked products:</div>
                     <div className="card-body">
-                      <div className="row">
-                        <div className="col-md-3 d-flex justify-content-center align-items-center">
-                          <a className="btn btn-dark" href="#">
-                            <i className="fa fa-pencil-square-o"></i>
-                            &nbsp;Modify
-                          </a>
-                        </div>
-                        <div className="col-md-3 d-flex justify-content-center align-items-center">
-                          <a className="btn btn-dark" href="#">
-                            <i className="fa fa-trash-o"></i>&nbsp;Delete
-                          </a>
-                        </div>
-                        <div className="col-md-3"></div>
-                        <div className="col-md-3"></div>
-                      </div>
-                      <br />
                       <table className="table">
                         <thead className="thead-dark">
                           <tr>
@@ -270,7 +213,6 @@ export default function OrderProducts() {
                   </div>
                 </div>
               </div>
-              <br />
               <div className="row">
                 <div className="col-md-12 d-flex justify-content-end align-items-center border-top p-1">
                   <button class="btn btn-success" onClick={placeOrder}>

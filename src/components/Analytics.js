@@ -1,15 +1,38 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
+import { getArticlesCardAnalytics } from '../services/ArticleService'
+import { CURRENCY } from "../consts";
 
-export class Analytics extends Component {
-  render() {
+export default function Analytics({match}) {
+
+    const [productAnalytics, setProductAnalytics] = useState([])
+
+    useEffect(() => {
+      (async () => {
+        setProductAnalytics(await getArticlesCardAnalytics(match.params.id));
+      })();
+    }, [])
+
+    const renderAnalytics = () => {
+      return productAnalytics.map(analytic => {
+        return (
+          <tr>
+            <th scope="row">1</th>
+            <td>{analytic.type}</td>
+            <td>{analytic.direction}</td>
+            <td>{analytic.quantity}</td>
+            <td>{CURRENCY} {analytic.price}</td>
+            <td>{CURRENCY} {analytic.value}</td>
+          </tr>
+        )
+      })
+    }
+
     return (
       <div>
         <div className="col-md-12 p-0 bg-info" >
           <div className="card">
-            <div className="card-header d-flex justify-content-center align-items-center"> Warehouse 1</div>
+            <div className="card-header d-flex justify-content-center align-items-center"> Product analytics</div>
             <div className="card-body">
-              <h5 className="card-title"><b>Some product 1</b></h5>
-              <h6 className="card-subtitle my-2 text-muted">Product id: 1222</h6>
               <table className="table">
                 <thead className="thead-dark">
                   <tr>
@@ -22,30 +45,7 @@ export class Analytics extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>OT</td>
-                    <td>U</td>
-                    <td>12</td>
-                    <td>$10.00</td>
-                    <td>$120.00</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>OT</td>
-                    <td>U</td>
-                    <td>12</td>
-                    <td>$10.00</td>
-                    <td>$120.00</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>OT</td>
-                    <td>U</td>
-                    <td>12</td>
-                    <td>$10.00</td>
-                    <td>$120.00</td>
-                  </tr>
+                  {renderAnalytics()}
                 </tbody>
               </table>
             </div>
@@ -53,7 +53,7 @@ export class Analytics extends Component {
         </div>
       </div>
     )
-  }
+  
 }
 
-export default Analytics
+

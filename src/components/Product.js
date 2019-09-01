@@ -12,30 +12,6 @@ export default function Product({ match }) {
     })();
   }, []);
 
-  //total input value = input quantity * input price
-  //total outpu price = output quantity * out price
-  //value start state = price * quantity
-  // article:
-  // articleGroup:
-  // id: 1
-  // name: "cpu"
-  // __proto__: Object
-  // id: 1
-  // name: "Intel i7 8th gen"
-  // unit: "PCS"
-  // inPrice: 0
-  // inQuantity: 0
-  // inValue: 0
-  // outPrice: 0
-  // outQuantity: 0
-  // outValue: 0
-  // price: null
-  // quantity: 0
-  // startStatePrice: 0
-  // startStateQuantity: 0
-  // startStateValue: 0
-  // value: null
-  console.log(articleCard);
 
   return (
     <div class="col-md-12 p-0 bg-info" style={{ height: "92% !important" }}>
@@ -64,14 +40,7 @@ export default function Product({ match }) {
               <p>{articleCard ? articleCard.startStateQuantity : null}</p>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6 d-flex justify-content-end align-items-center border-right">
-              <p>Quantity start price:</p>
-            </div>
-            <div class="col-md-6">
-              <p>{articleCard ? articleCard.startStatePrice : null}</p>
-            </div>
-          </div>
+          
           <div class="row">
             <div class="col-md-6 d-flex justify-content-end align-items-center border-right">
               <p>Quantity start value:</p>
@@ -88,14 +57,7 @@ export default function Product({ match }) {
               <p>{articleCard ? articleCard.inQuantity : null}</p>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6 d-flex justify-content-end align-items-center border-right">
-              <p>Input price:</p>
-            </div>
-            <div class="col-md-6">
-              <p>{articleCard ? articleCard.inPrice : null}</p>
-            </div>
-          </div>
+          
           <div class="row">
             <div class="col-md-6 d-flex justify-content-end align-items-center border-right">
               <p>Total input value:</p>
@@ -112,14 +74,7 @@ export default function Product({ match }) {
               <p>{articleCard ? articleCard.outQuantity : null}</p>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6 d-flex justify-content-end align-items-center border-right">
-              <p>Output price:</p>
-            </div>
-            <div class="col-md-6">
-              <p>{articleCard ? articleCard.outPrice : null}</p>
-            </div>
-          </div>
+          
           <div class="row">
             <div class="col-md-6 d-flex justify-content-end align-items-center border-right">
               <p>Total output value:</p>
