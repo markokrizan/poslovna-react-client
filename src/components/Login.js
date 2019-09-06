@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
-export class Login extends Component {
-  render() {
+
+export default function Login({handleMockLogin}){
+
     return (
         <div className="row h-100">
             <div className="col-md-3"></div>
@@ -30,7 +31,7 @@ export class Login extends Component {
                     </div>
                     <div className="row">
                       <div className="col-md-4"></div>
-                      <div className="col-md-4 d-flex justify-content-center align-items-center"><button type="submit" className="btn btn-success">Log in</button></div>
+                      <div className="col-md-4 d-flex justify-content-center align-items-center"><button type="button" className="btn btn-success" onClick = {() => handleMockLogin()}>Log in</button></div>
                       <div className="col-md-4"></div>
                     </div>
                   </form>
@@ -39,9 +40,5 @@ export class Login extends Component {
             </div>
             <div className="col-md-3"></div>
           </div>
-      
     );
-  }
 }
-
-export default Login;

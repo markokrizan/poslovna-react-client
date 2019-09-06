@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 
-export class User extends Component {
-  render() {
+export default function User({mockUser}){
+
+    const handleMockLogout = () => {
+      localStorage.clear();
+      window.location.href = "/login";
+    }
+
     return (
         <div className="container">
         <br/>
@@ -15,7 +20,7 @@ export class User extends Component {
                     <h5 className="text-right">First name:</h5>
                   </div>
                   <div className="col-md-6">
-                    <h5 className="text-left">Mike</h5>
+                    <h5 className="text-left">{mockUser ? mockUser.firstName : ''}</h5>
                   </div>
                 </div>
                 <div className="row">
@@ -23,7 +28,7 @@ export class User extends Component {
                     <h5 className="text-right">Last name:</h5>
                   </div>
                   <div className="col-md-6">
-                    <h5 className="text-left">Smith</h5>
+                    <h5 className="text-left">{mockUser ? mockUser.lastName : ''}</h5>
                   </div>
                 </div>
                 <div className="row">
@@ -31,7 +36,7 @@ export class User extends Component {
                     <h5 className="text-right">Email:</h5>
                   </div>
                   <div className="col-md-6">
-                    <h5 className="text-left">mikesmith@mail.com</h5>
+                    <h5 className="text-left">{mockUser ? mockUser.email : ''}</h5>
                   </div>
                 </div>
                 <div className="row">
@@ -39,16 +44,20 @@ export class User extends Component {
                     <h5 className="text-right">Role:</h5>
                   </div>
                   <div className="col-md-6">
-                    <h5 className="text-left">Admin</h5>
+                    <h5 className="text-left">{mockUser ? mockUser.role : ''}</h5>
                   </div>
                 </div>
-              </div>
+                <br/>
+                <div className="row">
+                      <div className="col-md-4"></div>
+                      <div className="col-md-4 d-flex justify-content-center align-items-center"><button type="button" className="btn btn-success" onClick = {() => handleMockLogout()}>Logout</button></div>
+                      <div className="col-md-4"></div>
+                    </div>
+              </div>     
             </div>
           </div>
         </div>
       </div>
     )
-  }
 }
 
-export default User

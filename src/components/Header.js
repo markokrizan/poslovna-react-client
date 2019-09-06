@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, {Fragment}  from 'react'
 import { Link } from 'react-router-dom'
 
-class Header extends Component {
-  render() {
+export default function Header({mockUser}){
+
     return (
         <div className="row">
             <div className="col-md-12 p-0">
@@ -15,14 +15,20 @@ class Header extends Component {
                     
                 </div>
                 <div className="col-md-3 d-flex justify-content-center align-items-center">
+                </div>
+                <div className="col-md-3 d-flex justify-content-end align-items-center">
+                    {mockUser ? (
+                        <Fragment>
+                            <span>{mockUser ? `${mockUser.firstName} ${mockUser.lastName}` : ''}&nbsp;</span>
+                            <Link className = "custom-link" to={`/user`}><a className="btn btn-info"><i className="fa fa-user-o fa-2x"></i></a></Link>
+                        </Fragment>
+                    ) : (
+                        <Link className = "custom-link" to={`/login`}><a className="btn btn-info"><i className="fa fa-user-o fa-2x"></i></a></Link>
+                    )}
                     
                 </div>
-                <div className="col-md-3 d-flex justify-content-end align-items-center"><Link className = "custom-link" to={`/user`}><a className="btn btn-info"><i className="fa fa-user-o fa-2x"></i></a></Link></div>
                 </div>
             </div>
             </div>
         </div>);
-  }
 }
-
-export default Header

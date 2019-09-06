@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { concludeFiscalYear } from '../services/FiscalYearService'
 
-class Toolbar extends Component {
-  render() {
+export default function Toolbar({mockUser}) {
+
     return (
       <div className="container-fluid">
         <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -33,7 +33,7 @@ class Toolbar extends Component {
               <i className="fa fa-building-o"></i>Company
               </a>
             </Link>
-            <Link className="toolbar-link" to={`/documents`}>
+            {mockUser ? (
               <a className="btn btn-dark" href="#" onClick = {async () => {
                 const userResponse = window.confirm("Conclude fiscal year?");
                 if (userResponse == true) {
@@ -42,13 +42,11 @@ class Toolbar extends Component {
               }}>
                 <i className="fa fa-times-circle"></i>Conclude
               </a>
-            </Link>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
-      
     );
-  }
 }
-
-export default Toolbar;

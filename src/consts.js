@@ -1,5 +1,5 @@
 const API_CONSTS = {
-  baseUrl: "http://192.168.1.12:8080/"
+  baseUrl: "http://localhost:8080/"
 };
 
 const CURRENCY = "§";
