@@ -7,6 +7,7 @@ export default function User({mockUser}){
       window.location.href = "/login";
     }
 
+    debugger
     return (
         <div className="container">
         <br/>

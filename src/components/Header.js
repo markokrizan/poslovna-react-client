@@ -1,5 +1,6 @@
 import React, {Fragment}  from 'react'
 import { Link } from 'react-router-dom'
+import isLoggedIn from '../services/AuthService'
 
 export default function Header({mockUser}){
 
@@ -17,7 +18,7 @@ export default function Header({mockUser}){
                 <div className="col-md-3 d-flex justify-content-center align-items-center">
                 </div>
                 <div className="col-md-3 d-flex justify-content-end align-items-center">
-                    {mockUser ? (
+                    {isLoggedIn() ? (
                         <Fragment>
                             <span>{mockUser ? `${mockUser.firstName} ${mockUser.lastName}` : ''}&nbsp;</span>
                             <Link className = "custom-link" to={`/user`}><a className="btn btn-info"><i className="fa fa-user-o fa-2x"></i></a></Link>

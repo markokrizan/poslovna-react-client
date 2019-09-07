@@ -20,6 +20,7 @@ import InHouseTranzit from "./components/InHouseTranzit";
 import Documents from "./components/Documents";
 import DocumentItems from "./components/DocumentItems";
 import Unauthorized from "./components/Unauthorized";
+import NotFound from "./components/NotFound";
 import ProtectedComponent from "./components/ProtectedComponent";
 import "./App.css";
 import {mockLogin} from './services/mock';
@@ -62,6 +63,7 @@ export default function App(){
           <ProtectedComponent path="/user" exact component={() => <User mockUser = {mockUser}/>} />
           <Route path="/company-info" exact component={Company} />
           <Route path="/unauthorized" exact component={Unauthorized} />
+          <Route path="*" component={NotFound}/>
         </Switch>
       </Router>
     );

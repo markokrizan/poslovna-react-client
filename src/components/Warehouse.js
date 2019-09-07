@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { getArticlesCards } from "../services/ArticleService";
 import { getArticleGroupArticles } from "../services/ArticleGroupService";
 import { getWarehouse } from "../services/WarehouseService";
+import GenericPagination from './GenericPagination';
 
 export default function Warehouse({ warehouseId, articleGroups }) {
   const [articleCards, setArticleCards] = useState([]);
+  const [articleCardsPage, setArticleCardsPage] = useState([]);
   const [warehouseInfo, setWarehouseInfo] = useState(null);
 
   useEffect(() => {
@@ -18,8 +20,16 @@ export default function Warehouse({ warehouseId, articleGroups }) {
     })();
   }, [warehouseId]);
 
+  const setPagedData = (page) => {
+    setArticleCardsPage(page)
+  }
+
+
   const renderArticles = () => {
-    return articleCards.map((articleCard, idx) => {
+    if(!articleCardsPage){
+      return
+    }
+    return articleCardsPage.map((articleCard, idx) => {
       return (
         <tr>
           <th scope="row">{idx + 1}</th>
@@ -91,6 +101,7 @@ export default function Warehouse({ warehouseId, articleGroups }) {
           </table>
         </div>
       </div>
+      <GenericPagination data={articleCards} returnPage={setPagedData}/>
     </div>
   ) : (
     <div className="col-md-10 p-0 bg-info" >

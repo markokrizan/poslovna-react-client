@@ -5,10 +5,12 @@ import { getBusinessPartners } from "../services/BusinessPartnerService";
 import { getAllArticleCards, createDocument } from "../services/ArticleService";
 import { random } from "lodash";
 import { CURRENCY } from "../consts";
+import GenericPagination from './GenericPagination';
 
 export default function OrderProducts() {
   const [warehouses, setWarehouses] = useState([]);
   const [businessPartners, setBusinessPartners] = useState([]);
+  const [allArticleCardsPage, setAllArticleCardsPage] = useState([]);
   const [allArticleCards, setAllArticleCards] = useState([]);
   const [pickedArticleCards, setPickedArticleCards] = useState([]);
 
@@ -41,8 +43,17 @@ export default function OrderProducts() {
     setPickedArticleCards(pickedArticleCards.filter(articleCard => articleCard.articleId !== id))
   }
 
-  const renderArticles = () =>
-    allArticleCards.map((article, idx) => {
+  const setPagedData = (page) => {
+    debugger
+    setAllArticleCardsPage(page)
+  }
+
+  const renderArticles = () => {
+    if(!allArticleCardsPage){
+      return
+    }
+    allArticleCardsPage.map((article, idx) => {
+      console.log(article)
       return (
         <tr>
           <th scope="row">{idx + 1}</th>
@@ -78,6 +89,8 @@ export default function OrderProducts() {
         </tr>
       );
     });
+  }
+
 
   const renderPickedArticles = () =>
     pickedArticleCards.map((article, i) => {
@@ -177,6 +190,7 @@ export default function OrderProducts() {
                           </table>
                         </div>
                       </div>
+                      <GenericPagination data={allArticleCards} returnPage={setPagedData}/>
                     </div>
                   </div>
                 </div>

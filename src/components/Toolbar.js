@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { concludeFiscalYear } from '../services/FiscalYearService'
+import isLoggedIn from '../services/AuthService'
 
 export default function Toolbar({mockUser}) {
 
@@ -33,7 +34,7 @@ export default function Toolbar({mockUser}) {
               <i className="fa fa-building-o"></i>Company
               </a>
             </Link>
-            {mockUser ? (
+            {isLoggedIn() ? (
               <a className="btn btn-dark" href="#" onClick = {async () => {
                 const userResponse = window.confirm("Conclude fiscal year?");
                 if (userResponse == true) {
