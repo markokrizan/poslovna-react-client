@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { concludeFiscalYear } from '../services/FiscalYearService'
-import isLoggedIn from '../services/AuthService'
+import {isLoggedIn } from '../services/AuthService'
 
-export default function Toolbar({mockUser}) {
+export default function Toolbar() {
 
     return (
       <div className="container-fluid">

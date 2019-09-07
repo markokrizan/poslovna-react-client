@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { getWarehouses } from "../services/WarehouseService";
 import { getBusinessPartners } from "../services/BusinessPartnerService";
 import { getAllArticleCards, createDocument } from "../services/ArticleService";
-import { random } from "lodash";
-import { CURRENCY } from "../consts";
 import GenericPagination from './GenericPagination';
 
 export default function OrderProducts() {
   const [warehouses, setWarehouses] = useState([]);
   const [businessPartners, setBusinessPartners] = useState([]);
+
   const [allArticleCardsPage, setAllArticleCardsPage] = useState([]);
   const [allArticleCards, setAllArticleCards] = useState([]);
+
   const [pickedArticleCards, setPickedArticleCards] = useState([]);
 
   const [selectedBusinessPartner, setSelectedBusinessPartner] = useState(1);
@@ -24,6 +23,10 @@ export default function OrderProducts() {
       setAllArticleCards(await getAllArticleCards());
     })();
   }, []);
+
+  const setPagedData = (page) => {
+    setAllArticleCardsPage(page)
+  }
 
   const renderOptions = data =>
     data.map(item => {
@@ -43,17 +46,11 @@ export default function OrderProducts() {
     setPickedArticleCards(pickedArticleCards.filter(articleCard => articleCard.articleId !== id))
   }
 
-  const setPagedData = (page) => {
-    debugger
-    setAllArticleCardsPage(page)
-  }
-
   const renderArticles = () => {
     if(!allArticleCardsPage){
       return
     }
-    allArticleCardsPage.map((article, idx) => {
-      console.log(article)
+    return allArticleCardsPage.map((article, idx) => {
       return (
         <tr>
           <th scope="row">{idx + 1}</th>

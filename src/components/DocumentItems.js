@@ -7,17 +7,9 @@ export default function DocumentItems({match}){
 
     useEffect(() => {
         (async () => {
-            debugger
             setItems(await getDocumentItems(match.params.id))
         })()
     }, [])
-
-    // {
-    //     "articleName": "string",
-    //     "price": 0,
-    //     "quantity": 0,
-    //     "value": 0
-    //   }
 
     const renderItems = () => {
         return items.map((item, idx) => {

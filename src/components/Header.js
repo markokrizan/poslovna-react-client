@@ -1,8 +1,10 @@
-import React, {Fragment}  from 'react'
+import React, {Fragment, useState}  from 'react'
 import { Link } from 'react-router-dom'
-import isLoggedIn from '../services/AuthService'
+import {isLoggedIn, getLoggedInUser} from '../services/AuthService'
 
-export default function Header({mockUser}){
+export default function Header(){
+
+    const [mockUser, setMockUser] = useState(getLoggedInUser())
 
     return (
         <div className="row">

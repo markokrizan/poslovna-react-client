@@ -1,48 +1,43 @@
 import React, { useState, useEffect } from 'react'
-import {chunk, isEqual} from 'lodash'
+import {chunk} from 'lodash'
 
 export default function GenericPagination({ returnPage, data }){
 
     const [pages, setPages] = useState([]);
-    const [currentPage, setCurrentPage] = useState(-1)
+
+    const [paginationState, setPaginationState] = useState({
+      currentPage : 0,
+      totalPages : 0
+    });
 
     useEffect(() => {
-      returnPage(pages[currentPage])
-      debugger
-    }, [currentPage])
+        setPages(chunk(data, 5))        
+    }, [data])
 
-    //Return the initial page
     useEffect(() => {
-      debugger
-      returnPage(pages[currentPage])
+      setPaginationState({
+        ...paginationState,
+        totalPages: pages.length
+      })
     }, [pages])
 
-
     useEffect(() => {
-        //seccond param - per page
-        setPages(chunk(data, 5))        
-        debugger
-    }, [data])
-    
-    const hasNext = () => currentPage !== pages.length - 1
-    
-    const previous = () => {
-        debugger
-        if(currentPage >= 1){
-            setCurrentPage(currentPage - 1)
-        }
-    }
-  
+      returnPage(pages[paginationState.currentPage])
+    }, [paginationState])
+
+
     const next = () => {
-        debugger
-        setCurrentPage(currentPage + 1)
+      if(paginationState.currentPage < pages.length - 1){
+        setPaginationState({...paginationState, currentPage: paginationState.currentPage + 1})
+      }
+      
     }
 
-    const styleLi = hasNext()
-      ? { color: 'darkgrey', cursor: 'pointer' }
-      : { cursor: 'pointer' };
-    
-    const styleAnchor = !hasNext() ? { pointerEvents: 'none' } : {};
+    const previous = () => {
+      if(paginationState.currentPage > 0){
+        setPaginationState({...paginationState, currentPage: paginationState.currentPage - 1})
+      }
+    }
     
     return (
         <ul className="pagination d-flex justify-content-center align-items-center">
@@ -51,11 +46,11 @@ export default function GenericPagination({ returnPage, data }){
               <span className="text-dark">«</span>
             </button>
           </li>
-          <li className="page-item" style={styleLi}>
-            <button type="button" style={styleAnchor} className="page-link" onClick={next}>
+          <li className="page-item" style={{ cursor: 'pointer' }}>
+            <button type="button" className="page-link" onClick={next}>
               <span className="text-dark">»</span>
             </button>
           </li>
         </ul>
-      );
+      );  
 }

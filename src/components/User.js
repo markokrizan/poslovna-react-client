@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import {getLoggedInUser} from '../services/AuthService'
 
-export default function User({mockUser}){
+export default function User(){
+
+    const [mockUser, setMockUser] = useState(getLoggedInUser())
 
     const handleMockLogout = () => {
       localStorage.clear();
       window.location.href = "/login";
     }
 
-    debugger
     return (
         <div className="container">
         <br/>

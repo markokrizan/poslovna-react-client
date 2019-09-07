@@ -32,7 +32,9 @@ export default function App(){
     const handleMockLogin = async () => {
       const { mockUser, mockToken } = await mockLogin();
       localStorage.setItem('token', mockToken);
+      localStorage.setItem('user', JSON.stringify(mockUser));
       setMockUser(mockUser);
+      window.location.href = '/warehouses/';
     }
 
     return (

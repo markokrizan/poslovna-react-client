@@ -100,8 +100,8 @@ export default function Warehouse({ warehouseId, articleGroups }) {
             </tbody>
           </table>
         </div>
+        <GenericPagination data={articleCards} returnPage={setPagedData}/>
       </div>
-      <GenericPagination data={articleCards} returnPage={setPagedData}/>
     </div>
   ) : (
     <div className="col-md-10 p-0 bg-info" >

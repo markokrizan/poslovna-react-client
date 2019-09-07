@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { getWarehouses } from "../services/WarehouseService";
 import { getBusinessPartners } from "../services/BusinessPartnerService";
 import { getArticlesCards, createDocument } from "../services/ArticleService";
+import GenericPagination from './GenericPagination';
 
 
 export default function OrderProducts() {
   const [warehouses, setWarehouses] = useState([]);
   const [businessPartners, setBusinessPartners] = useState([]);
+  const [articlesToShipPage, setArticlesToShipPage] = useState([]);
   const [articlesToShip, setArticlesToShip] = useState([]);
   const [pickedArticleCards, setPickedArticleCards] = useState([]);
 
@@ -21,6 +23,10 @@ export default function OrderProducts() {
       setArticlesToShip(await getArticlesCards(selectedLocalWarehouse));
     })();
   }, []);
+
+  const setPagedData = (page) => {
+    setArticlesToShipPage(page)
+  }
 
   useEffect(() => {
     (async () => {
@@ -46,8 +52,11 @@ export default function OrderProducts() {
       setPickedArticleCards(pickedArticleCards.filter(articleCard => articleCard.articleId !== id))
     }
   
-    const renderArticles = () =>
-    articlesToShip.map((article, idx) => {
+    const renderArticles = () =>{
+    if(!articlesToShipPage){
+      return;
+    }
+    return articlesToShipPage.map((article, idx) => {
         return (
           <tr>
             <th scope="row">{idx + 1}</th>
@@ -85,7 +94,8 @@ export default function OrderProducts() {
           </tr>
         );
       });
-  
+    }
+
     const renderPickedArticles = () =>
       pickedArticleCards.map((article, i) => {
         return (
@@ -193,6 +203,7 @@ export default function OrderProducts() {
                           </table>
                         </div>
                       </div>
+                      <GenericPagination data={articlesToShip} returnPage={setPagedData}/>
                     </div>
                   </div>
                 </div>

@@ -23,7 +23,6 @@ export default function Documents(){
 
     const renderDocuments = () => {
         return documents.map((document, idx) => {
-            console.log(document)
             return (
                 <tr>
                     <td>{idx + 1}</td>

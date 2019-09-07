@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { getWarehouses } from "../services/WarehouseService";
 import { getArticlesCards, createDocument } from "../services/ArticleService";
+import GenericPagination from './GenericPagination';
 
 export default function OrderProducts() {
   const [warehouses, setWarehouses] = useState([]);
@@ -10,6 +10,7 @@ export default function OrderProducts() {
   const [selectedToWarehouse, setSelectedToWarehouse] = useState(1);
 
   const [productsToTransfer, setProductsToTransfer] = useState([]);
+  const [productsToTransferPage, setProductsToTransferPage] = useState([]);
   const [pickedArticleCards, setPickedArticleCards] = useState([]);
 
   useEffect(() => {
@@ -18,6 +19,10 @@ export default function OrderProducts() {
       setProductsToTransfer(await getArticlesCards(selectedFromWarehouse));
     })();
   }, []);
+
+  const setPagedData = (page) => {
+    setProductsToTransferPage(page)
+  }
 
   useEffect(() => {
     (async () => {
@@ -30,35 +35,39 @@ export default function OrderProducts() {
       return <option value={warehouse.id}>{warehouse.name}</option>;
     });
 
-    const renderArticles = () =>
-    productsToTransfer.map((article, idx) => {
-        return (
-          <tr>
-            <th scope="row">{idx + 1}</th>
-            <td className="text-center">{article.article.name}</td>
-            <td className="d-flex justify-content-center align-items-center">
-              <input
-                type="number"
-                required
-                min="1"
-                max={article.quantity}
-                className="form-control w-75"
-                id="quantity_input"
-                placeholder="Enter quantity"
-              />
-              ({article.quantity})
-            </td>
-            <td>
-              <button
-                className="btn btn-info"
-                onClick={e => pickProduct(e.target, article.article.id)}
-              >
-                Add
-              </button>
-            </td>
-          </tr>
-        );
-      });
+    const renderArticles = () => {
+      if(!productsToTransferPage){
+        return
+      }
+      return productsToTransferPage.map((article, idx) => {
+          return (
+            <tr>
+              <th scope="row">{idx + 1}</th>
+              <td className="text-center">{article.article.name}</td>
+              <td className="d-flex justify-content-center align-items-center">
+                <input
+                  type="number"
+                  required
+                  min="1"
+                  max={article.quantity}
+                  className="form-control w-75"
+                  id="quantity_input"
+                  placeholder="Enter quantity"
+                />
+                ({article.quantity})
+              </td>
+              <td>
+                <button
+                  className="btn btn-info"
+                  onClick={e => pickProduct(e.target, article.article.id)}
+                >
+                  Add
+                </button>
+              </td>
+            </tr>
+          );
+        });
+    }
 
       const removeAddedArticle = (id) => {
         setPickedArticleCards(pickedArticleCards.filter(articleCard => articleCard.articleId !== id))
@@ -179,6 +188,7 @@ export default function OrderProducts() {
                           </table>
                         </div>
                       </div>
+                      <GenericPagination data={productsToTransfer} returnPage={setPagedData}/>
                     </div>
                   </div>
                 </div>

@@ -15,7 +15,7 @@ export default function Login({handleMockLogin}){
                       <div className="col-md-12">
                         <div className="form-group row d-flex justify-content-center align-items-center">
                           <div className="col-10 d-flex justify-content-center align-items-center">
-                            <input type="text" className="form-control w-75" id="inputmailh" placeholder="Enter username"/>
+                            <input type="text" className="form-control w-75" id="inputmailh" placeholder="Enter username" value = "admin@mail.com"/>
                           </div>
                         </div>
                       </div>
@@ -24,7 +24,7 @@ export default function Login({handleMockLogin}){
                       <div className="col-md-12">
                         <div className="form-group row d-flex justify-content-center align-items-center">
                           <div className="col-10 d-flex justify-content-center align-items-center">
-                            <input type="password" className="form-control w-75" id="inputmailh" placeholder="Enter password"/>
+                            <input type="password" className="form-control w-75" id="inputmailh" placeholder="Enter password" value = "secret"/>
                           </div>
                         </div>
                       </div>
