@@ -18,4 +18,11 @@ const concludeFiscalYear = async () =>
     method: "POST"
   });
 
-export { getFicalYearDocuments, getFiscalYears, concludeFiscalYear };
+const getCurrentFiscalYear = async () =>
+  await request({
+    url: `/fiscal-years/current`,
+    method: "GET"
+  });
+
+
+export { getFicalYearDocuments, getFiscalYears, concludeFiscalYear, getCurrentFiscalYear };

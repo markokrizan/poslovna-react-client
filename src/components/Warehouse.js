@@ -5,6 +5,8 @@ import { getArticlesCards } from "../services/ArticleService";
 import { getArticleGroupArticles } from "../services/ArticleGroupService";
 import { getWarehouse } from "../services/WarehouseService";
 import GenericPagination from './GenericPagination';
+import { API_CONSTS } from '../consts';
+import { getCurrentFiscalYear } from '../services/FiscalYearService'
 
 export default function Warehouse({ warehouseId, articleGroups }) {
   const [articleCards, setArticleCards] = useState([]);
@@ -43,11 +45,20 @@ export default function Warehouse({ warehouseId, articleGroups }) {
             >
               <a className="btn btn-info">Info</a>
             </Link>
+            <button
+              className="btn btn-info m-1"
+              onClick={() => getAnalyticReport(articleCard.article.id)}
+            ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
           </td>
         </tr>
       );
     });
   };
+
+  const getAnalyticReport = async articleCardId => {
+    const fiscalYear = await getCurrentFiscalYear();
+    window.location.href =  `${API_CONSTS.baseUrl}reports/articleCardAnalytics/${warehouseId}/${articleCardId}/${fiscalYear.id}`;
+  }
 
   const renderGroupOptions = () => {
     return articleGroups.map(articleGroup => {
@@ -59,6 +70,10 @@ export default function Warehouse({ warehouseId, articleGroups }) {
     setArticleCards(await getArticleGroupArticles(warehouseId, e.target.value));
   };
 
+  const getWarehouseLagerListReport = async () => {
+    window.location.href = `${API_CONSTS.baseUrl}/reports/warehouseState/${warehouseId}`;
+  }
+
   return warehouseId ? (
     <div className="col-md-10 p-0 bg-info" draggable="true">
       <div className="card">
@@ -67,8 +82,15 @@ export default function Warehouse({ warehouseId, articleGroups }) {
           Warehouse Info
         </div>
         <div className="card-body">
-          <h4>{warehouseInfo ? warehouseInfo.name : ""}</h4>
-          <p>{warehouseInfo ? warehouseInfo.address : ""}</p>
+          <div class = "row">
+            <div class = "col-md-6">
+             <h4>{warehouseInfo ? warehouseInfo.name : ""}</h4>
+             <p>{warehouseInfo ? warehouseInfo.address : ""}</p>
+            </div>
+            <div class = "col-md-6 d-flex justify-content-end align-items-center">
+                <button class = "btn btn-info" onClick = {getWarehouseLagerListReport}><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Lager list</button>
+            </div>
+          </div>
           <div className="row">
             <div className="col-md-6 d-flex align-items-center justify-content-end border-right">
               <h5 className="">Filter by article group:</h5>
