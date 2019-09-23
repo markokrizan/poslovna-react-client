@@ -115,7 +115,7 @@ export default function Product({ match }) {
           <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4 d-flex justify-content-center align-items-center">
-              <Link className="custom-link" to={`/products/1/analytics`}>
+              <Link className="custom-link" to={`/warehouses/${match.params.warehouseId}/article/${match.params.articleId}/analytics`} >
                 <a class="btn btn-info">Analytics</a>
               </Link>
             </div>

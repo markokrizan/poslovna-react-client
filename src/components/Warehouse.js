@@ -6,7 +6,6 @@ import { getArticleGroupArticles } from "../services/ArticleGroupService";
 import { getWarehouse } from "../services/WarehouseService";
 import GenericPagination from './GenericPagination';
 import { API_CONSTS } from '../consts';
-import { getCurrentFiscalYear } from '../services/FiscalYearService'
 
 export default function Warehouse({ warehouseId, articleGroups }) {
   const [articleCards, setArticleCards] = useState([]);
@@ -45,20 +44,11 @@ export default function Warehouse({ warehouseId, articleGroups }) {
             >
               <a className="btn btn-info">Info</a>
             </Link>
-            <button
-              className="btn btn-info m-1"
-              onClick={() => getAnalyticReport(articleCard.article.id)}
-            ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
           </td>
         </tr>
       );
     });
   };
-
-  const getAnalyticReport = async articleCardId => {
-    const fiscalYear = await getCurrentFiscalYear();
-    window.location.href =  `${API_CONSTS.baseUrl}reports/articleCardAnalytics/${warehouseId}/${articleCardId}/${fiscalYear.id}`;
-  }
 
   const renderGroupOptions = () => {
     return articleGroups.map(articleGroup => {

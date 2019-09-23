@@ -50,7 +50,7 @@ export default function App(){
             exact
             component={Product}
           />
-          <ProtectedComponent path="/products/:id/analytics" exact component={Analytics} />
+          <ProtectedComponent path="/warehouses/:warehouseId/article/:articleId/analytics" exact component={Analytics} />
           <Route path="/login" exact component={() => <Login handleMockLogin={handleMockLogin}/>} />
           <ProtectedComponent
             path="/order-products/receipts"

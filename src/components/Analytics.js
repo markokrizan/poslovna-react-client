@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { getArticlesCardAnalytics } from '../services/ArticleService'
 import { CURRENCY } from "../consts";
+import { getCurrentFiscalYear } from '../services/FiscalYearService'
+import { API_CONSTS } from '../consts';
 
 export default function Analytics({match}) {
 
@@ -8,9 +10,14 @@ export default function Analytics({match}) {
 
     useEffect(() => {
       (async () => {
-        setProductAnalytics(await getArticlesCardAnalytics(match.params.id));
+        setProductAnalytics(await getArticlesCardAnalytics(match.params.articleId));
       })();
     }, [])
+
+    const getAnalyticReport = async articleCardId => {
+      const fiscalYear = await getCurrentFiscalYear();
+      window.location.href =  `${API_CONSTS.baseUrl}reports/articleCardAnalytics/${match.params.warehouseId}/${match.params.articleId}/${fiscalYear.id}`;
+    }
 
     const renderAnalytics = () => {
       return productAnalytics.map(analytic => {
@@ -33,6 +40,10 @@ export default function Analytics({match}) {
           <div className="card">
             <div className="card-header d-flex justify-content-center align-items-center"> Product analytics</div>
             <div className="card-body">
+              {productAnalytics.length > 0 ? (<button
+                className="btn btn-info m-1"
+                onClick={() => getAnalyticReport()}
+              >Analytic report <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>) : ''}
               <table className="table">
                 <thead className="thead-dark">
                   <tr>
